@@ -38,6 +38,37 @@
       padding: 0 2rem 6rem;
     }
 
+    /* PDF Button */
+    .pdf-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--accent);
+      color: #060d1a;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .7rem 1.2rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.35);
+      transition: background .2s, box-shadow .2s, transform .15s;
+    }
+
+    .pdf-btn:hover {
+      background: #33ddff;
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.55);
+      transform: translateY(-2px);
+    }
+
+    .pdf-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+
     /* Hero */
     .hero {
       padding: 5rem 0 3.5rem;
@@ -86,17 +117,31 @@
       animation: fadeUp .7s .45s forwards;
     }
 
-    .hero-contact a, .hero-contact span {
-      display: block;
+    .hero-contact a,
+    .hero-contact span {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: .45rem;
       font-family: var(--mono);
       font-size: 11.5px;
       color: var(--muted);
       text-decoration: none;
-      line-height: 2;
+      line-height: 1;
+      padding: .28rem 0;
       transition: color .2s;
     }
 
     .hero-contact a:hover { color: var(--accent); }
+
+    .hero-contact svg {
+      width: 13px;
+      height: 13px;
+      flex-shrink: 0;
+      color: var(--accent2);
+    }
+
+    .hero-contact a:hover svg { color: var(--accent); }
 
     /* Sections */
     section {
@@ -106,18 +151,9 @@
       transition: opacity .7s ease, transform .7s ease;
     }
 
-    section.visible {
-      opacity: 1;
-      transform: none;
-    }
+    section.visible { opacity: 1; transform: none; }
 
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
+    .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
     .section-num { font-family: var(--mono); font-size: 10px; color: var(--accent2); letter-spacing: .12em; }
     .section-title { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; }
     .section-line { flex: 1; height: 1px; background: var(--border); }
@@ -142,32 +178,15 @@
     }
 
     .job:first-of-type { border-top: 1px solid var(--border); }
-
     .job-org { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .3rem; }
     .job-role { font-family: var(--serif); font-size: 1.25rem; font-weight: 400; margin-bottom: .7rem; }
     .job-date { font-family: var(--mono); font-size: 11px; color: var(--muted); white-space: nowrap; padding-top: .2rem; }
-
     .job ul { list-style: none; padding: 0; }
-
-    .job ul li {
-      color: #8aadcc;
-      font-size: 14px;
-      padding-left: 1.1rem;
-      position: relative;
-      margin-bottom: .35rem;
-    }
-
+    .job ul li { color: #8aadcc; font-size: 14px; padding-left: 1.1rem; position: relative; margin-bottom: .35rem; }
     .job ul li::before { content: '›'; position: absolute; left: 0; color: var(--accent2); font-size: 1rem; line-height: 1.5; }
 
     /* Skills */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-    }
-
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
     .skill-card { background: var(--surface); padding: 1.4rem 1.6rem; transition: background .2s; }
     .skill-card:hover { background: #0f1e35; }
     .skill-cat { font-family: var(--mono); font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); margin-bottom: .6rem; }
@@ -176,23 +195,13 @@
     /* Educación */
     .edu-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
     .edu-row:first-of-type { border-top: 1px solid var(--border); }
-    .edu-name { font-size: 14.5px; color: var(--text); }
+    .edu-name { font-size: 14.5px; }
     .edu-inst { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: .2rem; }
     .edu-year { font-family: var(--mono); font-size: 11px; color: var(--accent2); white-space: nowrap; }
 
     /* Formación */
     .courses { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: .6rem; }
-
-    .course-item {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--muted);
-      padding: .6rem .9rem;
-      border: 1px solid var(--border);
-      border-left: 2px solid var(--border);
-      transition: border-color .2s, color .2s;
-    }
-
+    .course-item { font-family: var(--mono); font-size: 12px; color: var(--muted); padding: .6rem .9rem; border: 1px solid var(--border); border-left: 2px solid var(--border); transition: border-color .2s, color .2s; }
     .course-item:hover { border-left-color: var(--accent); color: var(--text); }
     .course-platform { display: inline-block; color: var(--accent2); margin-right: .4em; }
 
@@ -202,15 +211,7 @@
     .lang-level { font-family: var(--mono); font-size: 11px; color: var(--muted); }
 
     /* Footer */
-    footer {
-      margin-top: 5rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      opacity: .4;
-    }
-
+    footer { margin-top: 5rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; opacity: .4; }
     footer span { font-family: var(--mono); font-size: 11px; color: var(--muted); }
 
     @keyframes fadeUp {
@@ -221,13 +222,67 @@
     @media (max-width: 600px) {
       .hero { grid-template-columns: 1fr; }
       .hero-contact { text-align: left; }
+      .hero-contact a, .hero-contact span { justify-content: flex-start; }
       .job { grid-template-columns: 1fr; }
       .job-date { order: -1; }
       .lang-row { gap: 2rem; }
+      .pdf-btn { bottom: 1rem; right: 1rem; }
+    }
+
+    /* Print styles */
+    @media print {
+      @page { size: A4; margin: 18mm 20mm; }
+
+      .pdf-btn { display: none !important; }
+
+      body { background: #fff !important; color: #111 !important; font-size: 11pt; line-height: 1.6; }
+      .wrapper { max-width: 100%; padding: 0; }
+      .hero { padding: 0 0 1.5rem; border-bottom: 1.5px solid #ccc; }
+      .hero h1 { font-size: 2rem; opacity: 1 !important; animation: none !important; color: #111; }
+      .hero h1 em { color: #0077aa; }
+      .hero-label { color: #0077aa; opacity: 1 !important; animation: none !important; }
+      .hero-title { color: #555 !important; opacity: 1 !important; animation: none !important; }
+      .hero-contact { opacity: 1 !important; animation: none !important; }
+      .hero-contact a, .hero-contact span { color: #555 !important; }
+      .hero-contact svg { color: #0077aa !important; }
+      section { opacity: 1 !important; transform: none !important; padding-top: 1.4rem; page-break-inside: avoid; }
+      .section-title { font-size: 1.2rem; color: #111; }
+      .section-num { color: #0077aa; }
+      .section-line { background: #ccc; }
+      .perfil-text { color: #333; border-left-color: #0077aa; font-size: 10.5pt; }
+      .job { border-color: #ddd; }
+      .job:first-of-type { border-top-color: #ddd; }
+      .job-org { color: #0077aa; }
+      .job-role { color: #111; }
+      .job-date { color: #666; }
+      .job ul li { color: #444; }
+      .job ul li::before { color: #0077aa; }
+      .skills-grid { background: #e8e8e8; border-color: #e8e8e8; }
+      .skill-card { background: #f7f7f7 !important; }
+      .skill-cat { color: #0077aa; }
+      .skill-items { color: #444; }
+      .edu-row { border-color: #ddd; }
+      .edu-row:first-of-type { border-top-color: #ddd; }
+      .edu-year { color: #0077aa; }
+      .course-item { border-color: #ddd; border-left-color: #ddd; color: #555; }
+      .course-platform { color: #0077aa; }
+      .lang-level { color: #666; }
+      footer { border-top-color: #ddd; opacity: .6; }
+      footer span { color: #888; }
     }
   </style>
 </head>
 <body>
+
+<button class="pdf-btn" onclick="window.print()">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" y1="15" x2="12" y2="3"/>
+  </svg>
+  Exportar PDF
+</button>
+
 <div class="wrapper">
 
   <header class="hero">
@@ -237,11 +292,37 @@
       <p class="hero-title">Subdirector de Informática &nbsp;·&nbsp; Desarrollador Web &amp; Análisis de Datos</p>
     </div>
     <div class="hero-contact">
-      <a href="mailto:vincentjbs@gmail.com">vincentjbs@gmail.com</a>
-      <span>777 111 9401</span>
-      <a href="https://linkedin.com/in/vincentjbs" target="_blank">linkedin.com/in/vincentjbs</a>
-      <a href="https://github.com/vincentjbs" target="_blank">github.com/vincentjbs</a>
-      <span>Coatlán del Río, Morelos</span>
+
+      <!-- Email -->
+      <a href="mailto:vincentjbs@gmail.com">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        vincentjbs@gmail.com
+      </a>
+
+      <!-- Teléfono -->
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.72a16 16 0 0 0 6 6l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
+        777 111 9401
+      </span>
+
+      <!-- LinkedIn -->
+      <a href="https://linkedin.com/in/vincentjbs" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        linkedin.com/in/vincentjbs
+      </a>
+
+      <!-- GitHub -->
+      <a href="https://github.com/vincentjbs" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        github.com/vincentjbs
+      </a>
+
+      <!-- Domicilio -->
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Coatlán del Río, Morelos
+      </span>
+
     </div>
   </header>
 
@@ -375,16 +456,13 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     var sections = document.querySelectorAll('section');
-
     function revealVisible() {
       sections.forEach(function(s) {
-        var rect = s.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 40) {
+        if (s.getBoundingClientRect().top < window.innerHeight - 40) {
           s.classList.add('visible');
         }
       });
     }
-
     revealVisible();
     window.addEventListener('scroll', revealVisible, { passive: true });
   });
