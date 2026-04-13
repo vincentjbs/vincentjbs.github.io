@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vincent Jesús Bahena Serano · CV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #060d1a;
+      --surface:   #0b1628;
+      --border:    #152240;
+      --accent:    #00d4ff;
+      --accent2:   #0087cc;
+      --text:      #dce8f5;
+      --muted:     #4a6080;
+      --serif:     'DM Serif Display', Georgia, serif;
+      --mono:      'DM Mono', 'Courier New', monospace;
+      --sans:      'DM Sans', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: .5;
+    }
+
+    /* ── Layout ── */
+    .wrapper {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 5rem 0 3.5rem;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+    }
+
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .75rem;
+      opacity: 0;
+      animation: fadeUp .6s .1s forwards;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: -.01em;
+      font-weight: 400;
+      opacity: 0;
+      animation: fadeUp .7s .2s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-title {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: .9rem;
+      letter-spacing: .06em;
+      opacity: 0;
+      animation: fadeUp .7s .35s forwards;
+    }
+
+    .hero-contact {
+      text-align: right;
+      opacity: 0;
+      animation: fadeUp .7s .45s forwards;
+    }
+
+    .hero-contact a, .hero-contact span {
+      display: block;
+      font-family: var(--mono);
+      font-size: 11.5px;
+      color: var(--muted);
+      text-decoration: none;
+      line-height: 2;
+      transition: color .2s;
+    }
+
+    .hero-contact a:hover { color: var(--accent); }
+
+    /* ── Sections ── */
+    section {
+      padding-top: 3.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .6s, transform .6s;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--accent2);
+      letter-spacing: .12em;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: -.01em;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Perfil ── */
+    .perfil-text {
+      font-size: 15.5px;
+      color: #a8c4e0;
+      line-height: 1.85;
+      max-width: 72ch;
+      border-left: 2px solid var(--accent);
+      padding-left: 1.4rem;
+    }
+
+    /* ── Experiencia ── */
+    .job {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: .5rem 2rem;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .job:first-of-type { border-top: 1px solid var(--border); }
+
+    .job-org {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: .3rem;
+    }
+
+    .job-role {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: .7rem;
+    }
+
+    .job-date {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .06em;
+      white-space: nowrap;
+      padding-top: .2rem;
+    }
+
+    .job ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .job ul li {
+      color: #8aadcc;
+      padding-left: 1.1rem;
+      position: relative;
+      margin-bottom: .35rem;
+    }
+
+    .job ul li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--accent2);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    /* ── Skills grid ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .skill-card {
+      background: var(--surface);
+      padding: 1.4rem 1.6rem;
+      transition: background .2s;
+    }
+
+    .skill-card:hover { background: #1c1f25; }
+
+    .skill-cat {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .6rem;
+    }
+
+    .skill-items {
+      font-size: 13.5px;
+      color: #8aadcc;
+      line-height: 1.8;
+    }
+
+    /* ── Educación & Formación ── */
+    .edu-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .edu-row:first-of-type { border-top: 1px solid var(--border); }
+
+    .edu-name {
+      font-size: 14.5px;
+      color: var(--text);
+    }
+
+    .edu-inst {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: .2rem;
+    }
+
+    .edu-year {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent2);
+      white-space: nowrap;
+    }
+
+    /* ── Formación complementaria ── */
+    .courses {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: .6rem;
+    }
+
+    .course-item {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      padding: .6rem .9rem;
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--border);
+      transition: border-color .2s, color .2s;
+    }
+
+    .course-item:hover {
+      border-left-color: var(--accent);
+      color: var(--text);
+    }
+
+    .course-platform {
+      display: inline-block;
+      color: var(--accent2);
+      margin-right: .4em;
+    }
+
+    /* ── Idiomas ── */
+    .lang-row {
+      display: flex;
+      gap: 3rem;
+      padding-top: .5rem;
+    }
+
+    .lang-item {}
+
+    .lang-name {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+
+    .lang-level {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: .4;
+    }
+
+    footer span {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .08em;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-contact { text-align: left; }
+      .job { grid-template-columns: 1fr; }
+      .job-date { padding-top: 0; order: -1; }
+      .lang-row { gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div>
+      <p class="hero-label">Currículum Vitae</p>
+      <h1>Vincent Jesús<br><em>Bahena Serano</em></h1>
+      <p class="hero-title">Subdirector de Informática &nbsp;·&nbsp; Desarrollador Web &amp; Análisis de Datos</p>
+    </div>
+    <div class="hero-contact">
+      <a href="/cdn-cgi/l/email-protection#cabca3a4a9afa4bea0a8b98aada7aba3a6e4a9a5a7"><span class="__cf_email__" data-cfemail="f187989f92949f859b9382b1969c90989ddf929e9c">[email&#160;protected]</span></a>
+      <span>777 111 9401</span>
+      <a href="https://linkedin.com/in/vincentjbs" target="_blank">linkedin.com/in/vincentjbs</a>
+      <a href="https://github.com/vincentjbs" target="_blank">github.com/vincentjbs</a>
+      <span>Coatlán del Río, Morelos</span>
+    </div>
+  </header>
+
+  <!-- PERFIL -->
+  <section id="perfil">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Perfil Profesional</h2>
+      <span class="section-line"></span>
+    </div>
+    <p class="perfil-text">
+      Ingeniero en Sistemas Computacionales con más de 10 años de experiencia en instituciones del sector público. Especializado en administración de sistemas, desarrollo web full-stack y análisis de datos. Actualmente en formación activa en Python para ciencia de datos (Pandas, Plotly) y desarrollo backend (FastAPI), con aplicación directa en proyectos institucionales como dashboards de seguridad pública, sistemas de gestión de tickets de soporte y control de activos.
+    </p>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section id="experiencia">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Experiencia Profesional</h2>
+      <span class="section-line"></span>
+    </div>
+
+    <div class="job">
+      <div>
+        <p class="job-org">SESESP – Secretariado Ejecutivo del Sistema Estatal de Seguridad Pública, Morelos</p>
+        <p class="job-role">Subdirector de Informática</p>
+        <ul>
+          <li>Administración y actualización del portal oficial institucional (Drupal / PHP / MySQL) en servidor Windows Server 2008 R2.</li>
+          <li>Configuración e implementación de servidor Debian 10 para despliegue de aplicaciones web internas.</li>
+          <li>Soporte técnico preventivo y correctivo al parque de cómputo institucional.</li>
+          <li>Gestión de cuentas en Plataforma México y actualización en la Plataforma Nacional de Transparencia.</li>
+          <li>Desarrollo de herramientas internas: sistema de tickets de soporte (Firebase + Netlify), bitácora vehicular, inventario de equipo de cómputo y tableros interactivos de análisis de incidencia delictiva (datos SESNSP).</li>
+        </ul>
+      </div>
+      <span class="job-date">Jun 2014 – Actualidad</span>
+    </div>
+
+    <div class="job">
+      <div>
+        <p class="job-org">Proweb-Corp (Freelance)</p>
+        <p class="job-role">Desarrollador Web Front-End</p>
+        <ul>
+          <li>Desarrollo front-end para ADYS Technology, EPDYM y consultorio médico.</li>
+          <li>Uso de HTML5, CSS3, JavaScript y PHP para formularios de contacto.</li>
+        </ul>
+      </div>
+      <span class="job-date">Jul 2013 – May 2014</span>
+    </div>
+
+    <div class="job">
+      <div>
+        <p class="job-org">Ayuntamiento de Miacatlán (Freelance)</p>
+        <p class="job-role">Desarrollador Web Full-Stack</p>
+        <ul>
+          <li>Desarrollo de aplicación back-end y front-end para administración del padrón del panteón municipal (JSP, HTML, CSS, MySQL).</li>
+          <li>Desarrollo del portal principal del ayuntamiento.</li>
+        </ul>
+      </div>
+      <span class="job-date">Ene – Jun 2013</span>
+    </div>
+  </section>
+
+  <!-- HABILIDADES -->
+  <section id="habilidades">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Habilidades Técnicas</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <p class="skill-cat">Lenguajes</p>
+        <p class="skill-items">Python · JavaScript · HTML5 · CSS3 · PHP · SQL</p>
+      </div>
+      <div class="skill-card">
+        <p class="skill-cat">Frameworks</p>
+        <p class="skill-items">React · Bootstrap · FastAPI (en formación)</p>
+      </div>
+      <div class="skill-card">
+        <p class="skill-cat">Datos &amp; Visualización</p>
+        <p class="skill-items">Pandas · Plotly · Chart.js · Análisis SESNSP</p>
+      </div>
+      <div class="skill-card">
+        <p class="skill-cat">Backend / Cloud</p>
+        <p class="skill-items">Firebase (Firestore · Auth · Hosting) · Netlify · Node.js · Express</p>
+      </div>
+      <div class="skill-card">
+        <p class="skill-cat">Bases de Datos</p>
+        <p class="skill-items">MySQL · Firestore (NoSQL)</p>
+      </div>
+      <div class="skill-card">
+        <p class="skill-cat">DevOps / Infra</p>
+        <p class="skill-items">Git · GitHub · Linux (Debian · Ubuntu · Mint) · Windows Server · VMware · VirtualBox</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCACIÓN -->
+  <section id="educacion">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Educación</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="edu-row">
+      <div>
+        <p class="edu-name">Ingeniería en Sistemas Computacionales</p>
+        <p class="edu-inst">Instituto Tecnológico de Zacatepec &nbsp;·&nbsp; Cédula Profesional: 7868966</p>
+      </div>
+      <span class="edu-year">Dic 2011</span>
+    </div>
+  </section>
+
+  <!-- FORMACIÓN COMPLEMENTARIA -->
+  <section id="formacion">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Formación Complementaria</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="courses">
+      <div class="course-item"><span class="course-platform">Platzi</span>Curso Python 3 – Práctico</div>
+      <div class="course-item"><span class="course-platform">Platzi</span>Curso Python 3</div>
+      <div class="course-item"><span class="course-platform">Platzi</span>Curso Profesional de Git y GitHub</div>
+      <div class="course-item"><span class="course-platform">Platzi</span>Introducción a la Terminal y Línea de Comandos</div>
+      <div class="course-item"><span class="course-platform">Platzi</span>Introducción al Desarrollo Web</div>
+      <div class="course-item"><span class="course-platform">SoloLearn</span>Python</div>
+      <div class="course-item"><span class="course-platform">SoloLearn</span>HTML Fundamentals</div>
+      <div class="course-item"><span class="course-platform">SoloLearn</span>SQL Fundamentals</div>
+      <div class="course-item"><span class="course-platform">Coursera</span>Data Science: Programación Estadística con R</div>
+      <div class="course-item"><span class="course-platform">Gob. Morelos</span>Almacenamiento y Ofimática</div>
+      <div class="course-item"><span class="course-platform">Gob. Morelos</span>Métodos para Reuniones Virtuales</div>
+    </div>
+  </section>
+
+  <!-- IDIOMAS -->
+  <section id="idiomas">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Idiomas</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="lang-row">
+      <div class="lang-item">
+        <p class="lang-name">Español</p>
+        <p class="lang-level">Lengua materna</p>
+      </div>
+      <div class="lang-item">
+        <p class="lang-name">Inglés</p>
+        <p class="lang-level">Lectura y comprensión de documentación técnica</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Vincent Jesús Bahena Serano</span>
+    <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="62140b0c01070c1608001122050f030b0e4c010d0f">[email&#160;protected]</a></span>
+  </footer>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd72
